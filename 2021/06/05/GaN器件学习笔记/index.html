@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="芝麻汤圆"><meta name="copyright" content="芝麻汤圆"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>GaN器件学习笔记 | 芝麻汤圆的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.24/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_j5gk85dg4pf.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.css"><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/copy-tex.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@latest/dist/contrib/auto-render.min.js"></script><script>document.addEventListener("DOMContentLoaded", () => {
+  Yun.utils.renderKatex();
+});</script><link rel="shortcut icon" type="image/svg+xml" href="/yun.svg"><link rel="mask-icon" href="/yun.svg" color="#0078E7"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"tclizha.github.io","root":"/","title":"芝麻汤圆的小站","version":"1.6.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><link rel="preconnect" href="https://www.google-analytics.com" crossorigin><script async src="https://www.googletagmanager.com/gtag/js?id=UA-121354150-1"></script><script>if (CONFIG.hostname === location.hostname) {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-121354150-1');
+}</script><script data-ad-client="ca-pub-2245427233262012" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(function(){
+  var bp = document.createElement('script');
+  var curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else {
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})();</script><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M9KWR9L');</script><!-- End Google Tag Manager --><meta name="description" content="记个简单的增强型GaN笔记 内容主要来源于《氮化镓功率晶体管——器件、电路与应用》这本书 器件概述二维电子气与GaN器件结构2DEG 在AlGaN和GaN的交界处存在着一层二维电子气（2DEG），当施加电压时,这种2DEG可以有效地传递电子，这便是GaN器件导电性的来源  通过在栅源极之间施加负压，可以将2DEG抵消，使得导电通路中断 利用这个原理可以很方便地制成耗尽型器件 耗尽型器件常态为通路，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GaN器件学习笔记">
+<meta property="og:url" content="http://tclizha.github.io/2021/06/05/GaN%E5%99%A8%E4%BB%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="芝麻汤圆的小站">
+<meta property="og:description" content="记个简单的增强型GaN笔记 内容主要来源于《氮化镓功率晶体管——器件、电路与应用》这本书 器件概述二维电子气与GaN器件结构2DEG 在AlGaN和GaN的交界处存在着一层二维电子气（2DEG），当施加电压时,这种2DEG可以有效地传递电子，这便是GaN器件导电性的来源  通过在栅源极之间施加负压，可以将2DEG抵消，使得导电通路中断 利用这个原理可以很方便地制成耗尽型器件 耗尽型器件常态为通路，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214132350849.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214133000847.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214133153859.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214134359462.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214134620785.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214135655304.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214145155474.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214153039704.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214155036817.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214163957904.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214165026466.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214173137149.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214180536812.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214180740702.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214182805919.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214192820955.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214193110769.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214193808372.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210215230308935.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216103136911.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216141003926.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216141200698.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/1610073035896-78f33a25-181a-42bb-904a-1e3ccb62232c.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216150134777.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216202156592.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210218201916070.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210218192802785.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210218203913830.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210218204310355.png">
+<meta property="article:published_time" content="2021-06-04T16:51:42.000Z">
+<meta property="article:modified_time" content="2021-06-04T17:34:45.730Z">
+<meta property="article:author" content="芝麻汤圆">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214132350849.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="芝麻汤圆"><img width="96" loading="lazy" src="https://raw.githubusercontent.com/TClizha/PicCloud/main/img/38.jpg" alt="芝麻汤圆"><span class="site-author-status" title="搬砖好累">😭</span></a><div class="site-author-name"><a href="/about/">芝麻汤圆</a></div><span class="site-name">芝麻汤圆的小站</span><sub class="site-subtitle"></sub><div class="site-desciption"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">1</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">3</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">0</span></a></div><a class="site-state-item hty-icon-button" href="/about/#comment" title="留言板"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-clipboard-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:jlj201120@outlook.com" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%99%A8%E4%BB%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">器件概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E7%94%B5%E5%AD%90%E6%B0%94%E4%B8%8EGaN%E5%99%A8%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">二维电子气与GaN器件结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2DEG"><span class="toc-number">1.1.1.</span> <span class="toc-text">2DEG</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pGaN-Gate-Enhancement%E2%80%90Mode-Structure"><span class="toc-number">1.1.2.</span> <span class="toc-text">pGaN Gate Enhancement‐Mode Structure</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hybrid-Normally-Off-Structures"><span class="toc-number">1.1.3.</span> <span class="toc-text">Hybrid Normally Off Structures</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E5%AF%BC%E9%80%9A"><span class="toc-number">1.1.4.</span> <span class="toc-text">反向导通</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%99%A8%E4%BB%B6%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">器件参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BB%E7%A9%BF%E7%94%B5%E5%8E%8B-BV-DSS"><span class="toc-number">1.2.1.</span> <span class="toc-text">击穿电压$BV_{DSS}$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%84%E6%BC%8F%E7%94%B5%E6%B5%81-I-DSS"><span class="toc-number">1.2.2.</span> <span class="toc-text">泄漏电流$I_{DSS}$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%BC%E9%80%9A%E7%94%B5%E9%98%BB-R-DS-on"><span class="toc-number">1.2.3.</span> <span class="toc-text">导通电阻$R_{DS(on)}$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%88%E5%80%BC%E7%94%B5%E5%8E%8B-V-th"><span class="toc-number">1.2.4.</span> <span class="toc-text">阈值电压$V_{th}$</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E5%AE%B9%E4%B8%8E%E7%94%B5%E8%8D%B7"><span class="toc-number">1.2.5.</span> <span class="toc-text">电容与电荷</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E5%AF%BC"><span class="toc-number">1.2.6.</span> <span class="toc-text">反向传导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%AD%E9%98%BB"><span class="toc-number">1.2.7.</span> <span class="toc-text">热阻</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GaN%E7%9A%84%E9%A9%B1%E5%8A%A8"><span class="toc-number">2.</span> <span class="toc-text">GaN的驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">2.1.</span> <span class="toc-text">驱动过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%85%E6%9E%81%E9%A9%B1%E5%8A%A8%E7%94%B5%E5%8E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">栅极驱动电压</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E4%B8%BE%E5%92%8C%E6%B5%AE%E5%8A%A8%E7%94%B5%E6%BA%90"><span class="toc-number">2.3.</span> <span class="toc-text">自举和浮动电源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dv-dt-%E6%8A%97%E6%80%A7"><span class="toc-number">2.4.</span> <span class="toc-text">$dv&#x2F;dt$抗性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#di-dt-%E6%8A%97%E6%80%A7"><span class="toc-number">2.5.</span> <span class="toc-text">$di&#x2F;dt$抗性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E4%BF%A1%E5%8F%B7%E5%A4%B1%E7%9C%9F"><span class="toc-number">2.6.</span> <span class="toc-text">逻辑信号失真</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PCB%E5%B8%83%E7%BA%BF%E4%B8%8E%E6%B5%8B%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text">PCB布线与测量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E5%BC%80%E5%85%B3%E6%8D%9F%E8%80%97%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">硬开关损耗分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%85%B3%E6%8D%9F%E8%80%97"><span class="toc-number">4.1.</span> <span class="toc-text">开关损耗</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E5%8E%8B%E8%BD%AC%E6%8D%A2%E5%91%A8%E6%9C%9F"><span class="toc-number">4.1.1.</span> <span class="toc-text">电压转换周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E6%B5%81%E8%BD%AC%E6%8D%A2%E5%91%A8%E6%9C%9F"><span class="toc-number">4.1.2.</span> <span class="toc-text">电流转换周期</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E7%94%B5%E5%AE%B9-C-OSS-%E6%8D%9F%E8%80%97"><span class="toc-number">4.2.</span> <span class="toc-text">输出电容($C_{OSS}$)损耗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%85%E6%9E%81%E7%94%B5%E8%8D%B7-Q-G-%E6%8D%9F%E8%80%97"><span class="toc-number">4.3.</span> <span class="toc-text">栅极电荷($Q_G$)损耗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%90%91%E5%AF%BC%E9%80%9A%E6%8D%9F%E8%80%97"><span class="toc-number">4.4.</span> <span class="toc-text">正向导通损耗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E6%81%A2%E5%A4%8D-Q-RR-%E6%8D%9F%E8%80%97"><span class="toc-number">4.5.</span> <span class="toc-text">反向恢复($Q_{RR}$)损耗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E6%BA%90%E7%94%B5%E6%84%9F%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">4.6.</span> <span class="toc-text">共源电感的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E7%8E%87%E7%8E%AF%E8%B7%AF%E7%94%B5%E6%84%9F%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">4.7.</span> <span class="toc-text">功率环路电感的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E8%81%94%E8%82%96%E7%89%B9%E5%9F%BA%E4%BA%8C%E6%9E%81%E7%AE%A1"><span class="toc-number">4.8.</span> <span class="toc-text">并联肖特基二极管</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="http://TClizha.github.io/2021/06/05/GaN%E5%99%A8%E4%BB%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="芝麻汤圆"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="芝麻汤圆的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">GaN器件学习笔记</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="Created: 2021-06-05 00:51:42" itemprop="dateCreated datePublished" datetime="2021-06-05T00:51:42+08:00">2021-06-05</time></div><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/note/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">note</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/note/power-Electronic/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">power Electronic</span></a></span> > <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/note/power-Electronic/device/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">device</span></a></span></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><p>记个简单的增强型GaN笔记</p>
+<p>内容主要来源于《氮化镓功率晶体管——器件、电路与应用》这本书</p>
+<h2 id="器件概述"><a href="#器件概述" class="headerlink" title="器件概述"></a>器件概述</h2><h3 id="二维电子气与GaN器件结构"><a href="#二维电子气与GaN器件结构" class="headerlink" title="二维电子气与GaN器件结构"></a>二维电子气与GaN器件结构</h3><h4 id="2DEG"><a href="#2DEG" class="headerlink" title="2DEG"></a>2DEG</h4><p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214132350849.png" alt="image-20210214132350849" loading="lazy"></p>
+<p>在AlGaN和GaN的交界处存在着一层二维电子气（2DEG），当施加电压时,这种2DEG可以有效地传递电子，这便是GaN器件导电性的来源</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214133000847.png" alt="image-20210214133000847" loading="lazy"></p>
+<p>通过在栅源极之间施加负压，可以将2DEG抵消，使得导电通路中断</p>
+<p>利用这个原理可以很方便地制成耗尽型器件</p>
+<p>耗尽型器件常态为通路，必须施加负压才能维持断态，实际应用起来不方便，于是出现了如下的增强型结构</p>
+<p>这种结构使得GaN器件常态下断路，只有在栅源间施加正电压才能导通</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214133153859.png" alt="image-20210214133153859" loading="lazy"></p>
+<p>常用的增强型GaN器件结构有两种，分别是pGaN Gate Enhancement‐Mode Structure和Hybrid Normally Off Structures</p>
+<h4 id="pGaN-Gate-Enhancement‐Mode-Structure"><a href="#pGaN-Gate-Enhancement‐Mode-Structure" class="headerlink" title="pGaN Gate Enhancement‐Mode Structure"></a>pGaN Gate Enhancement‐Mode Structure</h4><p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214134359462.png" alt="image-20210214134359462" loading="lazy"></p>
+<p>p掺杂的GaN层产生的正电压大于2DEG的挤压电压，使得2DEG被耗尽</p>
+<h4 id="Hybrid-Normally-Off-Structures"><a href="#Hybrid-Normally-Off-Structures" class="headerlink" title="Hybrid Normally Off Structures"></a>Hybrid Normally Off Structures</h4><p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214134620785.png" alt="image-20210214134620785" loading="lazy"></p>
+<p>另外一种做法是将耗尽型GaN管和增强型MOS管串联</p>
+<p>由于增加了一个MOS管，这种结构势必会增加系统的损耗，因此这种结构适合用于GaN导通电阻远大于MOS管的情况</p>
+<p>由于高导通电阻意味着高耐压，这种方案仅适用于高压系统（高于200V）</p>
+<h4 id="反向导通"><a href="#反向导通" class="headerlink" title="反向导通"></a>反向导通</h4><p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214135655304.png" alt="image-20210214135655304" loading="lazy"></p>
+<p>2DEG流过电流不分正负，使得增强型GaN同样可以反向导通，其原理与正向导通相似</p>
+<p>只要栅源极施加的负压大于$V_{th}$，2DEG就会联通，反向电流流过2DEG</p>
+<p>上面介绍的MOS混合结构同样可以流过反向电流，不过反向电流要同时流过MOS的体二极管和耗尽型GaN</p>
+<h3 id="器件参数"><a href="#器件参数" class="headerlink" title="器件参数"></a>器件参数</h3><h4 id="击穿电压-BV-DSS"><a href="#击穿电压-BV-DSS" class="headerlink" title="击穿电压$BV_{DSS}$"></a>击穿电压$BV_{DSS}$</h4><p>用于描述器件承受关断电压的能力</p>
+<p>初了这个参数外，芯片厂商的手册里还可能会有高于击穿电压的瞬态电压，这意味着器件可以在短时间内承受更高的关断电压，这一参数和MOSFET的雪崩能力有些相似</p>
+<h4 id="泄漏电流-I-DSS"><a href="#泄漏电流-I-DSS" class="headerlink" title="泄漏电流$I_{DSS}$"></a>泄漏电流$I_{DSS}$</h4><p>器件处于关断状态时，仍存在小的泄漏电流$I_{DSS}$</p>
+<p>该参数与温度和$V_{DS}$都正相关</p>
+<h4 id="导通电阻-R-DS-on"><a href="#导通电阻-R-DS-on" class="headerlink" title="导通电阻$R_{DS(on)}$"></a>导通电阻$R_{DS(on)}$</h4><p>晶体管的导通电阻是指其所有组成部分电阻之和</p>
+<p>$R_{DS(on)}$的每个组成部分都会随温度变化，因此$R_{DS(on)}$的温度系数取决于GaN器件的设计</p>
+<p>$R_{DS(on)}$还与$I_D$和$V_{GS}$有关</p>
+<h4 id="阈值电压-V-th"><a href="#阈值电压-V-th" class="headerlink" title="阈值电压$V_{th}$"></a>阈值电压$V_{th}$</h4><p>GaN器件的$V_{th}$基本不随温度变化，然而MOS混合结构的阈值电压取决与MOS的阈值电压，而MOS的$V_{th}$具有负的温度系数</p>
+<h4 id="电容与电荷"><a href="#电容与电荷" class="headerlink" title="电容与电荷"></a>电容与电荷</h4><p>与FET相关的电容主要有$C_{GS}$、$C_{DS}$和$C_{GD}$，通过对这些电容充电可以控制FET的开通与关断</p>
+<p>手册中可能会给我们输入端电容$C_{ISS}$或输出端电容$C_{OSS}$，上述电容的换算如下所示</p>
+<ul>
+<li>$C_{OSS}=C_{GD}+C_{DS}$</li>
+<li>$C_{ISS}=C_{GD}+C_{GS}$</li>
+<li>$C_{RSS}=C_{GD}$</li>
+</ul>
+<p>这些电容不是固定值，而是对应的极电压的函数，因此使用时通常将其积分，得到对应的所需电荷$Q_G$、$Q_{GS}$、$Q_{GD}$、$Q_{OSS}$等，这些值不仅和器件有关，还和需要达到的电压有关</p>
+<h4 id="反向传导"><a href="#反向传导" class="headerlink" title="反向传导"></a>反向传导</h4><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214145155474.png" alt="image-20210214145155474" style="zoom: 50%;" / loading="lazy">
+
+<p>虽然不像MOS那样有体二极管，但2DEG为GaN器件提供了反向导通的通道</p>
+<p>正反电流都流过2DEG，因此正向导通和反向导通的$R_{DS}$具有相同的值和温度系数</p>
+<p>此外，如果将栅极电压降至0以下，降低的值会反映在反向压降上</p>
+<p>比如，假如$V_{GS}=0$时$V_{SD}=1.8V$，那么$V_{GS}=1V$时$V_{SD}=2.8V$</p>
+<h4 id="热阻"><a href="#热阻" class="headerlink" title="热阻"></a>热阻</h4><p>//TODO</p>
+<h2 id="GaN的驱动"><a href="#GaN的驱动" class="headerlink" title="GaN的驱动"></a>GaN的驱动</h2><h3 id="驱动过程"><a href="#驱动过程" class="headerlink" title="驱动过程"></a>驱动过程</h3><p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214153039704.png" alt="image-20210214153039704" loading="lazy"></p>
+<p>与MOSFET相似，GaN的驱动就是给其寄生电容充电使之达到要求电压</p>
+<p>如图，GaN器件的开通过程可以分为四个部分，每部分都有对应的所需电荷</p>
+<ul>
+<li>$V_{GS}$从零达到$V_{th}$，对应$Q_{GS1}$</li>
+<li>$V_{GS}$达到平台电压，在这期间$I_{DS}$开始增大，对应电荷$Q_{GS2}$</li>
+<li>$V_{GS}$保持平台电压，在这期间$V_{DS}$逐渐减小至零，器件完全导通，对应电荷$Q_{GD}$</li>
+<li>$V_{GS}$达到稳态栅极电压</li>
+</ul>
+<p>$Q_G$为驱动过程中总的充电电荷，$Q_{GS}$为将栅极电压加至平台电压所需电荷</p>
+<p>为了描述器件优劣，定义品质因数FOM，其值为$Q_G$和$R_{DS(on)}$的乘积</p>
+<h3 id="栅极驱动电压"><a href="#栅极驱动电压" class="headerlink" title="栅极驱动电压"></a>栅极驱动电压</h3><p>与MOS最高可达$\pm18V$的栅极电压不同，许多GaN器件栅极最大电压只有+6V/-5V</p>
+<p>与此同时，GaN器件要达到完全开通需要+4V以上的电压，一般使用时将稳态栅极电压设定为+5V</p>
+<p>为了满足这一要求，通常将栅极驱动器以接近临界阻尼的方式接通回路</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214155036817.png" alt="image-20210214155036817" loading="lazy"></p>
+<p>器件开通和关断时回路如图所示</p>
+<p>开通时，栅极驱动器、晶体管、栅极驱动旁路电容（$C_{VDD}$）以及其线路电感组成LCR谐振电路</p>
+<p>为了严格抑制该电路，防止过冲，线路总的等效电阻必须满足下式</p>
+<p>$$R_{G(eq)}\geq\sqrt{\frac{4L_{G}}{C_{GS}}}$$</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214163957904.png" alt="image-20210214163957904" loading="lazy"></p>
+<p>对于下降沿，-5V实际上不存在实际限制，为了更快关断允许一些负振荡</p>
+<p>此外，由于少了$C_{VDD}$，线路此环路的感抗更小</p>
+<p>不过要注意负震荡随后的正向震荡不要超过$V_{th}$</p>
+<p>由于开通和关断的要求不同，可以使用两个不同的栅极电阻来独立地调整回路阻尼</p>
+<h3 id="自举和浮动电源"><a href="#自举和浮动电源" class="headerlink" title="自举和浮动电源"></a>自举和浮动电源</h3><p>驱动半桥时，我们常用下面的结构驱动</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214165026466.png" alt="image-20210214165026466" loading="lazy"></p>
+<p>当底边导通，高边关断时，电源总线通过二极管给$C_{Boot}$充电；底边关断后，$D_{Boot}$关断，$C_{Boot}$提供电压驱动高边器件</p>
+<p>理想情况下，$C_{Boot}$会被充电至总线电压减去二极管导通电压（大约0.7V）的大小</p>
+<p>但实际应用中，在下管关断而上管尚未开通时，会有电流反向流过下管进行续流，在下管产生的压降会使得$C_{Boot}$被过充电（$V_{DD}-V_{D_{Boot}}+V_{SD}$），如果算上线路寄生电感，过充会更大</p>
+<p>这一过充可能会影响上管驱动，损坏上管</p>
+<p>有三种方法可以减少过充：</p>
+<ul>
+<li>在开关互补的应用中，减少死区时间可以减少电容被过充的时间</li>
+<li>在下管反并联一个肖特基二极管以减小过充电压</li>
+<li>在开关不互补的应用中，使用专用驱动芯片</li>
+</ul>
+<h3 id="dv-dt-抗性"><a href="#dv-dt-抗性" class="headerlink" title="$dv/dt$抗性"></a>$dv/dt$抗性</h3><p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214173137149.png" alt="image-20210214173137149" loading="lazy"></p>
+<p>低端管漏极可能会有较大的$dv/dt$产生，这一$dv/dt$会使$C_{DS}$充电，连带着$C_{GD}和C_{GS}$都会充电，使得$V_{GS}&gt;V_{th}$，电路误导通</p>
+<p>假设$C_{GD}$电流全部流过$C_{GS}$，则只有密勒比$Q_{GD}/Q_{GS1}&gt;1$时，才能保证下管不会误导通，然而实际的GaN管的密勒比很少有小于1的</p>
+<p>为了防止误导通，通常在驱动处增加下拉电阻$R_{Sink}$增加电流回路，分流流经$Q_{GD}$的电流，防止误导通</p>
+<p>此外，在上下开关互补的应用中，可以调整死区时间，使上管恰好在下管关断震荡为负时开通，不过这一方法使得时许固定，不易实现</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214180536812.png" alt="image-20210214180536812" loading="lazy"></p>
+<h3 id="di-dt-抗性"><a href="#di-dt-抗性" class="headerlink" title="$di/dt$抗性"></a>$di/dt$抗性</h3><p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214180740702.png" alt="image-20210214180740702" loading="lazy"></p>
+<p>如图所示，栅极驱动回路和功率回路存在共源电感（CSI）</p>
+<p>在开关管关断时，高$di/dt$使得共源电感感应出电压，这一电压使得$C_{GS}$被驱动到负值，并经阻尼不足的LRC环路谐振得到正的震荡电压使开关管导通</p>
+<p>通过增加$R_{Sink}$的阻值来增加环路的谐振可以解决这一问题，但增大$R_{Sink}$会对$dv/dt$抗性产生负面影响</p>
+<p>另一个方法是改进封装和电路以减小CSI，比如将源极分为两路，一路作为驱动回路，一路作为功率回路</p>
+<h3 id="逻辑信号失真"><a href="#逻辑信号失真" class="headerlink" title="逻辑信号失真"></a>逻辑信号失真</h3><p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214182805919.png" alt="image-20210214182805919" loading="lazy"></p>
+<p>该图展示的是将CSI最小化后的电路，$di/dt$在CSI产生了感应电压</p>
+<p>当逻辑电路和功率回路共地，驱动电路的地是源极，由于源极和地之间的电压波动，逻辑电路的输出相对驱动电路会产生波动，若波动足够大甚至会影响逻辑输出值</p>
+<p>最佳解决方法是将逻辑电路的地接到源极上，但是对于含有多个低端开关管的电路来说并不实用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214192820955.png" alt="image-20210214192820955" loading="lazy"></p>
+<p>增加一个RC滤波电路可以有效地滤除这些杂波，但会带来延迟问题和宽度失真</p>
+<p>第二种方法是增加电平移位器或隔离器，不过会增加电路元件数量</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214193110769.png" alt="image-20210214193110769" loading="lazy"></p>
+<p>在半桥电路中，高端驱动会在高电平和低电平之间转换，电容上电压改变会产生共模电流</p>
+<p>共模电流同样会影响逻辑输出，严重时改变逻辑状态</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210214193808372.png" alt="image-20210214193808372" loading="lazy"></p>
+<p>减小共模电流，可以通过选用电容较小的器件或和减小回路面积来实现</p>
+<h2 id="PCB布线与测量"><a href="#PCB布线与测量" class="headerlink" title="PCB布线与测量"></a>PCB布线与测量</h2><p>//TODO</p>
+<h2 id="硬开关损耗分析"><a href="#硬开关损耗分析" class="headerlink" title="硬开关损耗分析"></a>硬开关损耗分析</h2><p>硬开关变换器的损耗包括以下几个部分：</p>
+<ul>
+<li>电流电压重合造成的开关损耗$P_{SW}$</li>
+<li>输出电容充放电所造成的输出电容损耗$P_{OSS}$</li>
+<li>栅源电容充放电所造成的栅极电荷损耗$P_{G}$</li>
+<li>体二极管续流所造成的反向传导损耗$P_{SD}$</li>
+<li>关闭体二极管所造成的反向恢复损耗$P_{RR}$，GaN虽然自身没有反向恢复损耗，但有些应用中可能需要并联一个肖特基二极管</li>
+</ul>
+<h3 id="开关损耗"><a href="#开关损耗" class="headerlink" title="开关损耗"></a>开关损耗</h3><p>通过下图的曲线，可以近似得到开关损耗</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210215230308935.png" loading="lazy"></p>
+<p>将开关损耗分成电压转换造成的功率损耗$P_{Vt}$和电流转换所造成的功率损耗$P_{Ct}$并求和<br>$$<br>P_{SW}=P_{Vt}+P_{Ct}=(1/2)V_{BUS}I_{DS}(t_{xR}+t_{xF})f_{SW}<br>$$<br>式中V、I、f都是已知的，只要得到开关时间便能估算出功率</p>
+<h4 id="电压转换周期"><a href="#电压转换周期" class="headerlink" title="电压转换周期"></a>电压转换周期</h4><p>电压转换时间为密勒电容充放电的时间，即$C_{GD}$充放电的时间</p>
+<p>电容充放电时间通常通过下式计算<br>$$<br>t=\frac{Q}{I}<br>$$<br>对于$Q_{GD}$，可以通过对$C_{GD}(C_{RSS})$积分的获得<br>$$<br>Q_{GD}=\int_0^{V_{BUS}}C_{RSS}(v_{DS})dv_{DS}<br>$$</p>
+<p>$C_{OSS}$的值通常由芯片手册曲线给出</p>
+<img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216103136911.png" alt="image-20210216103136911" style="zoom:50%;" / loading="lazy">
+
+<p>栅极电流受到驱动电路阻抗、电感等因素的影响，可以分别由下式得出：<br>$$<br>I_{Gvon}=\frac{V_{DR}-V_{PL}}{R_{Gon}}<br>$$</p>
+<p>$$<br>I_{Gvoff}=\frac{V_{PL}}{R_{Goff}}<br>$$</p>
+<p>式中$V_{PL}$为台阶电压，$V_{DR}$为驱动电压</p>
+<h4 id="电流转换周期"><a href="#电流转换周期" class="headerlink" title="电流转换周期"></a>电流转换周期</h4><p>电流转换时间为栅极电压从阈值电压到平台电压之间的一段时间，即给$Q_{GS2}$充电的时间，这里假如我们要得到100A漏源电流下的充电时间</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216141003926.png" alt="image-20210216141003926" loading="lazy"></p>
+<p>器件通常会给出如下的传输图，根据漏源电流可以得到平台电压，如33A对应2.3V平台电压，100A对应2.8V平台电压</p>
+<img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216141200698.png" alt="image-20210216141200698" style="zoom: 50%;" / loading="lazy">
+
+<p>$Q_{GS1}$可以由下式得到<br>$$<br>Q_{GS1}=\frac{Q_{GS}}{V_{pl}}\cdot V_{th}<br>$$<br>$Q_{GS(op)}$则由下式得到<br>$$<br>Q_{GS(op)}=\frac{Q_{GS}}{V_{pl}}\cdot V_{pl(op)}<br>$$</p>
+<p>导通和关断的栅极电流可由下式估算<br>$$<br>I_{Gcon}=\frac{V_{DR}-(\frac{V_{pl}+V_{th}}{2})}{R_{Gon}}<br>$$</p>
+<p>$$<br>I_{Gcoff}=\frac{V_{pl}+V_{th}}{2R_{Goff}}<br>$$</p>
+<p>将上述各式联立可以得到器件的导通和关断损耗<br>$$<br>P_{on}=P_{Vt}+P_{Ct}=\frac{V_{BUS}I_{DS}f_{SW}R_{Gon}}{2}\cdot [\frac{Q_{GD}}{V_{DR}-V_{pl}}+\frac{Q_{GS2}}{V_{DR}-(\frac{V_{pl}+V_{th}}{2})}]<br>$$</p>
+<p>$$<br>P_{off}=P_{Vt}+P_{Ct}=\frac{V_{BUS}I_{DS}f_{SW}R_{Goff}}{2}\cdot [\frac{Q_{GD}}{V_{pl}}+\frac{Q_{GS2}}{(\frac{V_{pl}+V_{th}}{2})}]<br>$$</p>
+<p>总开关损耗为$P_{on}$和$P_{off}$之和<br>$$<br>P_{SW}=P_{on}+P_{off}<br>$$</p>
+<h3 id="输出电容-C-OSS-损耗"><a href="#输出电容-C-OSS-损耗" class="headerlink" title="输出电容($C_{OSS}$)损耗"></a>输出电容($C_{OSS}$)损耗</h3><p>$$<br>P_{OSS}=f_{sw}E_{OSS}=f_{sw}\int_0^{V_{BUS}}v_{DS}C_{OSS}(v_{DS})dv_{DS}<br>$$</p>
+<p>输出电容损耗是否存在取决于电路的拓扑和工作状态</p>
+<h3 id="栅极电荷-Q-G-损耗"><a href="#栅极电荷-Q-G-损耗" class="headerlink" title="栅极电荷($Q_G$)损耗"></a>栅极电荷($Q_G$)损耗</h3><p>$$<br>P_G=Q_GV_{DR}f_{sw}<br>$$</p>
+<h3 id="正向导通损耗"><a href="#正向导通损耗" class="headerlink" title="正向导通损耗"></a>正向导通损耗</h3><p>正向导通损耗发生在死区时间，续流电流会流过关断的晶体管的体二极管造成损耗</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/1610073035896-78f33a25-181a-42bb-904a-1e3ccb62232c.png" alt="image.png" loading="lazy"></p>
+<p>其功耗由下式给出<br>$$<br>P_{SD}=V_{SD}I_{DS}t_{SD}f_{sw}<br>$$<br>正向导通时间须根据工作状态来确定，改时间虽然与逻辑死区时间有关，但并不相同</p>
+<p>下图中$t_{eff}$是实际的死区时间，$t_{SD}$是电流正向流过体二极管的时间，也就是产生正向导通损耗的时间</p>
+<p>两者的时间差是换向时间，用$t_{ZVS}$表示</p>
+<p><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216150134777.png" alt="image-20210216150134777" loading="lazy"></p>
+<p>在$t_{ZVS}$这段时间内，外部电流持续给器件$Q_1$和$Q_2$的输出电容充电，因此可以由下式得到$t_{ZVS}$<br>$$<br>t_{ZVS}=\frac{Q_{OSS_Q1}+Q_{OSS_Q2}}{T_{Turn-off}}<br>$$<br>其中$Q_{OSS}$通过对电容曲线积分获得<br>$$<br>Q_{OSS}=\int_0^{V_{BUS}}C_{OSS}(v_{DS})dv_{DS}<br>$$<br>反向传导时间通过死区时间减去换相时间获得<br>$$<br>t_{SD}=t_{eff}-t_{ZVS}<br>$$<br><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210216202156592.png" alt="image-20210216202156592" style="zoom: 50%;" / loading="lazy"></p>
+<p>如果$Q_2$在换向完成之前开通，那么用上式得到的$t_{DS}$为负，此时电路不存在正向导通损耗</p>
+<p>在这种情况下，$Q_2$导通时的开关节点电压由下式得到<br>$$<br>V_{PZVS}=\frac{I_{Turn-off}t_{eff}V_{BUS}}{Q_{OSS_Q1}+Q_{OSS_Q2}}<br>$$</p>
+<h3 id="反向恢复-Q-RR-损耗"><a href="#反向恢复-Q-RR-损耗" class="headerlink" title="反向恢复($Q_{RR}$)损耗"></a>反向恢复($Q_{RR}$)损耗</h3><p>增强型GaN晶体管没有反向恢复损耗</p>
+<p>共源共栅型晶体管由于串联了MOSFET而具有少量的反向恢复电荷</p>
+<p>反向恢复功耗由下式得到<br>$$<br>P_{RR}=E_{RR}f_{SW}=Q_{RR}V_{BUS}f_{sw}<br>$$<br>$Q_{RR}$并不容易计算，器件手册中一般只给出典型工作条件下的值</p>
+<h3 id="共源电感的影响"><a href="#共源电感的影响" class="headerlink" title="共源电感的影响"></a>共源电感的影响</h3><p>在给$C_{GS2}$充电期间，漏源极流过增长的电流，共源电感感应出电压，使得驱动电流减小，开关时间增长，极大地增加了器件导通时间</p>
+<img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210218201916070.png" alt="image-20210218201916070" style="zoom: 50%;" / loading="lazy">
+
+<img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210218192802785.png" alt="image-20210218192802785" style="zoom: 50%;" / loading="lazy">
+
+<p>假定感应电压不变，且忽略驱动回路中寄生电感的影响<br>$$<br>V_{DD}=V_G+V_{GS}+V_{LS}<br>$$</p>
+<p>$$<br>V_{DD}=R_GI_G+V_{GS}+\frac{L_SI_{DS}}{t_{CR_CSI}}<br>$$</p>
+<p>栅极电流$I_G$由下式给出<br>$$<br>I_G=\frac{Q_{CS2}}{t_{CR_CSI}}=\frac{C_{GS}I_{DS}}{t_{CR_CSI}g_m}<br>$$</p>
+<p>$g_m$为跨导,其值为$I_{DS}/V_{GS}$</p>
+<p>由上式可以推出$t_{CR_CSI}$的表达式<br>$$<br>t_{CR_CSI}=\frac{I_{DS}}{V_{DD}-V_{GS}}\frac{C_{gs}}{g_m}(\frac{L_sg_m}{C_{GS}}+R_G)<br>$$<br>该式可以提取出等效共源电感电阻$R_{CSI}$<br>$$<br>R_{CSI}=\frac{L_sg_m}{C_{GS}}<br>$$<br>该等效电阻可以用于计算电流转换周期</p>
+<h3 id="功率环路电感的影响"><a href="#功率环路电感的影响" class="headerlink" title="功率环路电感的影响"></a>功率环路电感的影响</h3><p>关断期间，功率环路电感会减慢转换速度，并增加漏极和源极上的电感</p>
+<p>开通期间，该电感会降低漏源电压以降低损耗</p>
+<p>总体来说该电路对电路产生的影响依然是负面的</p>
+<h3 id="并联肖特基二极管"><a href="#并联肖特基二极管" class="headerlink" title="并联肖特基二极管"></a>并联肖特基二极管</h3><img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210218203913830.png" alt="image-20210218203913830" style="zoom: 50%;" / loading="lazy">
+
+<p>如图所示，相比于MOSFET，增强型GaN的正向导通压降更高，因此会产生更大的功耗</p>
+<p>可以通过反并联肖特基二极管来减少该损耗</p>
+<p>不过反并联二极管会带来反向恢复电荷的损耗</p>
+<img src="https://cdn.jsdelivr.net/gh/TClizha/PicCloud/img/image-20210218204310355.png" alt="image-20210218204310355" style="zoom:50%;" / loading="lazy">
+
+</div><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>芝麻汤圆</li><li class="post-copyright-link"><strong>Post link: </strong><a href="http://tclizha.github.io/2021/06/05/GaN%E5%99%A8%E4%BB%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="GaN器件学习笔记">http://tclizha.github.io/2021/06/05/GaN%E5%99%A8%E4%BB%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> unless otherwise stated.</li></ul></section></article></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 </span><a class="with-love" id="animate" href="http://tclizha.github.io" title="芝麻汤圆的小站"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></a><span class="author"> 芝麻汤圆</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v5.4.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.6.0</span></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
